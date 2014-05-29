@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xgq.dao.DocumentMapper">
+    <resultMap type="document" id="documentMap">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="content" property="content"/>
+    </resultMap>
+
+    <select id="selectDocumentByName" parameterType="java.lang.String" resultMap="documentMap">
+        SELECT * FROM documents WHERE name=#{name}
+    </select>
+
+    <select id="query" parameterType="java.lang.String" resultMap="documentMap">
+        <include refid="MYSQL.paginationStart"/>
+        SELECT
+        *
+        FROM documents where 1=1
+        <if test="condition.name !=null and condition.name != '' ">
+            AND NAME = #{condition.name}
+        </if>
+        <include refid="MYSQL.paginationEnd" />
+    </select>
+</mapper>
