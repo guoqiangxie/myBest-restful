@@ -10,6 +10,11 @@
 
     <properties>
         <spring.version>3.1.2.RELEASE</spring.version>
+
+        <!--jetty运行参数设置-->
+        <xgq.module.contextPath>resteasy</xgq.module.contextPath>
+        <xgq.module.port>8081</xgq.module.port>
+        <xgq.module.stopPort>10000</xgq.module.stopPort>
     </properties>
 
     <profiles>
@@ -71,6 +76,20 @@
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>7.1.0.RC1</version>
+                <!--jetty升级到7以后，由eclipse公司接管，配置有所改变-->
+                <configuration>
+                    <webAppConfig>
+                        <contextPath>/${xgq.module.contextPath}</contextPath>
+                    </webAppConfig>
+                    <scanIntervalSeconds>2</scanIntervalSeconds>
+                    <stopKey>foo</stopKey>
+                    <stopPort>${xgq.module.stopPort}</stopPort>
+                    <connectors>
+                        <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+                            <port>${xgq.module.port}</port>
+                        </connector>
+                    </connectors>
+                </configuration>
             </plugin>
         </plugins>
     </build>

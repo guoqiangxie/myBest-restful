@@ -27,6 +27,6 @@ public class DocumentRepositoryImpl implements DocumentRepository {
         for (Document document : list) {
             dtoList.add(document.toDto());
         }
-        return new ResultDto<DocumentDto>();
+        return new ResultDto<DocumentDto>(queryDto.getPagination(), dtoList);
     }
 }
