@@ -24,8 +24,8 @@ public class DocumentResource {
     @Autowired
     private DocumentRepository documentRepository;
     @POST
-    @Consumes(MediaType.APPLICATION_XML)
-    @Produces(MediaType.APPLICATION_XML)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("/query")
     public Response query(QueryDto<QueryDucumentDto> queryDto) {
         ResultDto<DocumentDto> resultDto = documentRepository.query(queryDto);
